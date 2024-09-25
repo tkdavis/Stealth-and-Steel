@@ -34,7 +34,7 @@ public class PlayerMovement : NetworkBehaviour
             characterController.Move(movement);
             MoveServerRpc(direction);
         }
-        else if (IsOwner)
+        else
         {
             MoveServerRpc(Vector3.zero);
         }
@@ -47,6 +47,7 @@ public class PlayerMovement : NetworkBehaviour
         {
             Vector3 movement = transform.TransformDirection(direction) * moveSpeed * Time.deltaTime;
             Position.Value += movement;
+            transform.position = Position.Value;
         }
 
         UpdatePositionClientRpc(transform.position);
